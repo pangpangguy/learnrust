@@ -19,4 +19,13 @@ pub fn run() {
         name = "Ryan",
         activity = "basketball"
     );
+
+    //Placeholde traits
+    println!("Binary: {:b} | Hex : {:x} | Octal: {:o}", 10, 10, 10);
+
+    //Placeholder for debug trait
+    println!("{:?}", (12, true, "hello", true)); //=> a tuple but we can put in multiple values
+
+    //Basic Math
+    println!("10 + 10 = {}", 10 + 10);
 }
