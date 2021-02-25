@@ -1,7 +1,7 @@
 //mod print; //import function from print.rs
 //mod vars;
 //mod types;
-//mod strings;
+mod strings;
 //mod tuples;
 //mod arrays;
 //mod vectors;
@@ -10,13 +10,13 @@
 //mod functions;
 //mod pointer_ref;
 //mod structs;
-mod enums;
+//mod enums;
 
 fn main() {
     //print::run();
     //vars::run();
     //types::run();
-    //strings::run();
+    strings::run();
     //  tuples::run();
     //arrays::run();
     //vectors::run();
@@ -25,5 +25,5 @@ fn main() {
     //    functions::run();
     //pointer_ref::run();
     //structs::run();
-    enums::run();
+    //    enums::run();
 }
