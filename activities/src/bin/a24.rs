@@ -10,4 +10,9 @@
 
 fn main() {
     let data = vec![1, 2, 3, 4, 5];
+    let data2: Vec<_> = data.iter()
+                            .map(|x| x * 3)
+                            .filter(|x| x > &10)    //these functions always borrow data => need to use &
+                            .collect();
+    println!("{:?}", data2);
 }
