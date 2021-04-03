@@ -24,11 +24,11 @@ pub fn vecteur_aleatoire(taille: usize) -> Vec<u32> {
 /// ```
 pub fn remplir_blocs(tranche: &mut [u32], taille: usize) {
     let mut nb = 0;
-    for chunk in tranche.chunks_mut(taille){
-        for elem in chunk.iter_mut(){
+    for chunk in tranche.chunks_mut(taille) {
+        for elem in chunk.iter_mut() {
             *elem = nb;
         }
-        nb = nb+1;
+        nb = nb + 1;
     }
 }
 
@@ -68,5 +68,29 @@ pub fn fusion(s: &[u32], d: &mut [u32], taille_blocs: usize) {
 /// assert_eq!(v, w);
 /// ```
 pub fn tri_fusion(tranche: &mut [u32]) {
-    unimplemented!()
+    let n = tranche.len();
+    let mut taille_blocs = 1;
+    let mut source = tranche; //now source becomes the original slice
+    let mut destination: Vec<u32> = Vec::with_capacity(n);
+    unsafe {
+        destination.set_len(n);
+    }
+    let mut dest = destination.as_mut_slice();
+    let mut original_in_tranche: bool = true; //if false, it means dest is the tranche
+    while taille_blocs < n {
+        for (b, d) in source
+            .chunks(2 * taille_blocs)
+            .zip(dest.chunks_mut(2 * taille_blocs))
+        {
+            fusion(b, d, taille_blocs);
+        }
+        taille_blocs *= 2;
+        swap(&mut source, &mut dest);
+        original_in_tranche = !original_in_tranche;
+    }
+
+    if !original_in_tranche {
+        //dest is the original tranche, and the sorted array is in source
+        dest.copy_from_slice(source);
+    }
 }
