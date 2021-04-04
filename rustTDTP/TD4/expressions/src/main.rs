@@ -11,7 +11,20 @@ enum Token {
 use Token::{Entier, Fois, Plus};
 
 fn evaluation_simple(expression: &[Token]) -> u32 {
-    unimplemented!()
+    expression
+        .par_split(|x| match *x {
+            Token::Plus => true,
+            _ => false,
+        })
+        .map(|x| {
+            x.iter()
+                .map(|x| match *x {
+                    Token::Entier(i) => i,
+                    _ => 1,
+                })
+                .fold(1, |acc, x| acc * x)
+        })
+        .sum()
 }
 
 fn main() {
